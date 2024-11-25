@@ -19,7 +19,7 @@ class TestStudentManager(unittest.TestCase):
             [3, "Jan", "Krawczyk", []],
             [4, "Alojzy", "Kołodziejski", []],
         ]
-        self.test_file = "test_students.csv"
+        self.test_file = "students_list.csv"
 
     def tearDown(self):
         if os.path.exists(self.test_file):
