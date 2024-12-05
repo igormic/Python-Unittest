@@ -61,7 +61,6 @@ class TestStudentManager(unittest.TestCase):
         self.assertEqual(len(self.sample_students), initial_count - 1)
         self.assertNotIn([3, "Jan", "Krawczyk", []], self.sample_students)
 
-        # Próba usunięcia nieistniejącego studenta
         student_remove(self.sample_students, 99)
         self.assertEqual(len(self.sample_students), initial_count - 1)
 
