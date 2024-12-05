@@ -13,6 +13,14 @@ def student_add(students, name, surname):
     students.append([new_id, name, surname, []])
     print(f"Added student: {new_id}, {name} {surname}")
 
+def student_remove(students, student_id):
+    for student in students:
+        if student[0] == student_id:
+            students.remove(student)
+            print(f"Removed student: {student_id}, {student[1]} {student[2]}")
+            return
+    print(f"Student with ID {student_id} not found.")
+
 def student_base_export(students, filename="students_list.csv"):
     with open(filename, "w", newline='') as file:
         writer = csv.writer(file)
@@ -83,4 +91,6 @@ if __name__ == "__main__":
     display_students(students)
     update_attendance(students, 2, "Present", "2023-10-10")
     update_attendance(students, 4, "Present", "2023-11-10")
+    student_remove(students, 3)
+    display_students(students)
     student_base_export(students)
