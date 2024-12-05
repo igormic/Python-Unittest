@@ -4,6 +4,7 @@ import csv
 from datetime import datetime
 from testingpython_new import (
     student_add,
+    student_remove,
     student_base_export,
     student_base_import,
     mark_attendance,
@@ -52,6 +53,17 @@ class TestStudentManager(unittest.TestCase):
         self.assertEqual(self.sample_students[-1][1], "Anna")
         self.assertEqual(self.sample_students[-1][2], "Kowalska")
         self.assertEqual(self.sample_students[-1][0], 5)
+
+    def test_student_remove(self):
+        initial_count = len(self.sample_students)
+        student_remove(self.sample_students, 3)
+
+        self.assertEqual(len(self.sample_students), initial_count - 1)
+        self.assertNotIn([3, "Jan", "Krawczyk", []], self.sample_students)
+
+        # Próba usunięcia nieistniejącego studenta
+        student_remove(self.sample_students, 99)
+        self.assertEqual(len(self.sample_students), initial_count - 1)
 
     def test_mark_attendance(self):
         date_today = datetime.now().strftime('%Y-%m-%d')
