@@ -27,7 +27,7 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        pytest --cov=src tests/
+        pytest --cov=src
     
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
