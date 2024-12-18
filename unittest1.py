@@ -9,7 +9,6 @@ from testingpython_new import (
     student_base_import,
     mark_attendance,
     update_attendance,
-    display_students,
 )
 
 class TestStudentManager(unittest.TestCase):
