@@ -29,7 +29,8 @@ jobs:
       - name: Run tests with coverage
         run: |
           pytest --cov=testingpython_new --cov-report=html
-
+        env:
+          PYTHONPATH: $GITHUB_WORKSPACE
       - name: Upload coverage report
         uses: actions/upload-artifact@v3
         with:
