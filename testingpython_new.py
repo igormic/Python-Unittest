@@ -8,10 +8,12 @@ students = [
     [4, "Alojzy", "Kołodziejski", []],
 ]
 
+
 def student_add(students, name, surname):
     new_id = students[-1][0] + 1 if students else 1
     students.append([new_id, name, surname, []])
     print(f"Added student: {new_id}, {name} {surname}")
+
 
 def student_remove(students, student_id):
     for student in students:
@@ -21,16 +23,20 @@ def student_remove(students, student_id):
             return
     print(f"Student with ID {student_id} not found.")
 
+
 def student_base_export(students, filename="students_list.csv"):
-    with open(filename, "w", newline='') as file:
+    with open(filename, "w", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(["id", "name", "surname", "attendance"])
         for student in students:
             attendance_data = ";".join(
                 [f"{entry['date']}:{entry['status']}" for entry in student[3]]
             )
-            writer.writerow([student[0], student[1], student[2], attendance_data])
+            writer.writerow(
+                [student[0], student[1], student[2], attendance_data]
+            )
     print(f"Student list exported to {filename}")
+
 
 def student_base_import(filename="students_list.csv"):
     imported_students = []
@@ -41,25 +47,34 @@ def student_base_import(filename="students_list.csv"):
                 attendance = []
                 if row["attendance"]:
                     attendance = [
-                        {"date": entry.split(":")[0], "status": entry.split(":")[1]}
+                        {
+                            "date": entry.split(":")[0],
+                            "status": entry.split(":")[1],
+                        }
                         for entry in row["attendance"].split(";")
                     ]
-                imported_students.append([int(row["id"]), row["name"], row["surname"], attendance])
+                imported_students.append(
+                    [int(row["id"]), row["name"], row["surname"], attendance]
+                )
         print(f"Student list imported from {filename}")
     except FileNotFoundError:
         print(f"File {filename} not found.")
     return imported_students
 
+
 def mark_attendance(students, student_id, attendance, date_str=None):
     if date_str is None:
-        date_str = datetime.now().strftime('%Y-%m-%d')
+        date_str = datetime.now().strftime("%Y-%m-%d")
 
     for student in students:
         if student[0] == student_id:
             student[3].append({"date": date_str, "status": attendance})
-            print(f"Attendance marked: {student_id} -> {attendance} ({date_str})")
+            print(
+                f"Attendance marked: {student_id} -> {attendance} ({date_str})"
+            )
             return
     print(f"Student with ID {student_id} not found.")
+
 
 def display_students(students):
     print("\nStudent List:")
@@ -69,17 +84,21 @@ def display_students(students):
             print(f"  Date: {entry['date']} - Status: {entry['status']}")
     print()
 
+
 def update_attendance(students, student_id, new_status, date_str):
     for student in students:
         if student[0] == student_id:
             for entry in student[3]:
                 if entry["date"] == date_str:
                     entry["status"] = new_status
-                    print(f"Updated attendance: {student_id} -> {new_status} ({date_str})")
+                    print(
+                        f"Updated attendance: {student_id} -> {new_status} ({date_str})"
+                    )
                     return
             print(f"No attendance record for {student_id} on {date_str}.")
             return
     print(f"Student with ID {student_id} not found.")
+
 
 if __name__ == "__main__":
     student_base_export(students)

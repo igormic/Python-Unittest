@@ -43,7 +43,8 @@ class TestStudentManager(unittest.TestCase):
 
         self.assertEqual(len(self.sample_students[0][3]), 1)
         self.assertEqual(
-            self.sample_students[0][3][0], {"date": date_today, "status": "Present"}
+            self.sample_students[0][3][0],
+            {"date": date_today, "status": "Present"},
         )
 
     def test_update_attendance(self):
@@ -51,7 +52,8 @@ class TestStudentManager(unittest.TestCase):
         update_attendance(self.sample_students, 2, "Present", "2023-10-10")
 
         self.assertEqual(
-            self.sample_students[1][3][0], {"date": "2023-10-10", "status": "Present"}
+            self.sample_students[1][3][0],
+            {"date": "2023-10-10", "status": "Present"},
         )
 
     def test_import_nonexistent_file(self):
