@@ -1,12 +1,9 @@
-import csv
-import os
 import unittest
 from datetime import datetime
 
 from testingpython_new import (
     mark_attendance,
     student_add,
-    student_base_export,
     student_base_import,
     student_remove,
     update_attendance,
