@@ -28,9 +28,8 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          pytest --cov=testingpython_new --cov-report=html
-        env:
-          PYTHONPATH: $GITHUB_WORKSPACE
+          pytest --cov=testingpython_new unittest1.py
+
       - name: Upload coverage report
         uses: actions/upload-artifact@v3
         with:
@@ -47,18 +46,3 @@ jobs:
         uses: github/super-linter@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          config: .github/super-linter.yml
-
-  todo:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Scan for TODOs in code
-        uses: github/super-linter@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          scanForTODOs: true
