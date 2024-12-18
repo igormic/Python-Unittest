@@ -53,9 +53,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Scan for TODOs in code
+      - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          scanForTODOs: true
