@@ -32,9 +32,7 @@ def student_base_export(students, filename="students_list.csv"):
             attendance_data = ";".join(
                 [f"{entry['date']}:{entry['status']}" for entry in student[3]]
             )
-            writer.writerow(
-                [student[0], student[1], student[2], attendance_data]
-            )
+            writer.writerow([student[0], student[1], student[2], attendance_data])
     print(f"Student list exported to {filename}")
 
 
@@ -69,9 +67,7 @@ def mark_attendance(students, student_id, attendance, date_str=None):
     for student in students:
         if student[0] == student_id:
             student[3].append({"date": date_str, "status": attendance})
-            print(
-                f"Attendance marked: {student_id} -> {attendance} ({date_str})"
-            )
+            print(f"Attendance marked: {student_id} -> {attendance} ({date_str})")
             return
     print(f"Student with ID {student_id} not found.")
 
