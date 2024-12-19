@@ -37,15 +37,32 @@ jobs:
           path: htmlcov/
 
   lint:
-    runs-on: ubuntu-latest
+    needs: test
+    runs-on: "ubuntu-latest"
+
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run Super-Linter
-        uses: github/super-linter@v4
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Cache super-linter
+        uses: actions/cache@v3
+        with:
+          path: .cache/super-linter
+          key: ${{ runner.os }}-super-linter-${{ hashFiles('**/*.py') }}
+          restore-keys: |
+            ${{ runner.os }}-super-linter-
+      - name: Super-Linter
+        uses: super-linter/super-linter/slim@v7.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_PYTHON_RUFF: true
+          CACHE_DIR: .cache/super-linter
 
   todo-to-issue:
     runs-on: "ubuntu-latest"
